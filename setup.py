@@ -19,6 +19,6 @@ setup(
     version='1.0.0',
     description='Emotion Recognition app for running Python apps on Bluemix',
     long_description=long_description,
-    url='https://github.com/IBM-Bluemix/python-hello-world-flask',
+    url='https://github.com/LeeKien95/EmotionRecognition',
     license='Apache-2.0'
 )

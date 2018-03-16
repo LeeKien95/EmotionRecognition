@@ -3,3 +3,7 @@ applications:
 - name: Emotion Recognition
   memory: 128M
   instances: 2
+  disk_quota: 128M
+  host: nodejs001
+  command: python server.py
+  timeout: 80

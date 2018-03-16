@@ -3,7 +3,7 @@ import socket
 import ProcessLandmark as pl
 import simplejson as json
 from cloudant import Cloudant
-from flask import Flask, jsonify
+from flask import Flask, render_template, request, jsonify
 import atexit
 import cf_deployment_tracker
 import os
@@ -47,13 +47,18 @@ port = int(os.getenv('PORT', 8000))
 def predict():
     if request.method == 'POST':
         try:
-            data = request.json()
-            prediction = pl.getEmotionPredict(data["change_vector"])
+            data = request.get_json()
+            prediction = pl.getEmotionPredict(data["landmarkChange"])
+            print(prediction)
         except ValueError:
             return jsonify("Input Error.")
 
         return jsonify(prediction)
 
+
+@app.route("/")
+def hello():
+    return "Hello World!"
 
 @atexit.register
 def shutdown():
