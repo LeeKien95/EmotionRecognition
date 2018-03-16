@@ -1,0 +1,5 @@
+---
+applications:
+- name: Emotion Recognition
+  memory: 128M
+  instances: 2
