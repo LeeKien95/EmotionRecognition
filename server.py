@@ -41,6 +41,7 @@ elif os.path.isfile('vcap-local.json'):
         client = Cloudant(user, password, url=url, connect=True)
         db = client.create_database(db_name, throw_on_exists=False)
 
+
 port = int(os.getenv('PORT', 8089))
 
 @app.route("/predict", methods=['POST'])
