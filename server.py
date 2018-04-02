@@ -41,7 +41,7 @@ elif os.path.isfile('vcap-local.json'):
         client = Cloudant(user, password, url=url, connect=True)
         db = client.create_database(db_name, throw_on_exists=False)
 
-port = int(os.getenv('PORT', 8000))
+port = int(os.getenv('PORT', 8089))
 
 @app.route("/predict", methods=['POST'])
 def predict():
@@ -49,7 +49,7 @@ def predict():
         try:
             data = request.get_json()
             prediction = pl.getEmotionPredict(data["landmarkChange"])
-            print(prediction)
+            #print(prediction)
         except ValueError:
             return jsonify("Input Error.")
 
@@ -67,4 +67,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=port, debug=True)
+    app.run(host='10.8.75.135', port=port, debug=True)
