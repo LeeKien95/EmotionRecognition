@@ -49,6 +49,7 @@ def predict():
     if request.method == 'POST':
         try:
             data = request.get_json()
+            # print(data)
             prediction = pl.getEmotionPredict(data["landmarkChange"])
             #print(prediction)
         except ValueError:
