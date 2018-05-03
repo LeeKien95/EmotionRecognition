@@ -49,7 +49,7 @@ def predict():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            # print(data)
+            print(data)
             prediction = pl.getEmotionPredict(data["landmarkChange"])
             #print(prediction)
         except ValueError:
@@ -69,4 +69,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run(host='10.8.75.135', port=port, debug=True)
+    app.run(host='10.8.75.223', port=port, debug=True)

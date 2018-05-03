@@ -15,9 +15,19 @@ def getFacsList():
         facs = pickle.load(input)
     return facs
 
+def getEmotionModel():
+    with open('models/emotion_model.pkl', 'rb') as input:
+        em = pickle.load(input)
+    return em
+
+def getNormalizeData():
+    with open('models/normalize_data.pkl', 'rb') as input:
+        data = pickle.load(input)
+    return data
 #print(facs)
 #print(len(models))
     
+
 
 class ChangeVector:
     def __init__(self, facs = [], landmarkChange = [], emotion_label = 0):
