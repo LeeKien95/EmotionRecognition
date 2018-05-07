@@ -49,8 +49,9 @@ def predict():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            print(data["landmarkChange"])
-            prediction = pl.getEmotionPredict(data["landmarkChange"])
+            print(data["landmark_perk"])
+            print(data["landmark_neutral"])
+            prediction = pl.getEmotionPredict(data["landmark_neutral"], data["landmark_perk"])
             #print(prediction)
         except ValueError:
             return jsonify("Input Error.")
