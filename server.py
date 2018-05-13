@@ -1,6 +1,7 @@
 import asyncore
 import socket
 import ProcessLandmark as pl
+import ProcessImage as pi
 import simplejson as json
 from cloudant import Cloudant
 from flask import Flask, render_template, request, jsonify
@@ -49,9 +50,12 @@ def predict():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            print(data["landmark_perk"])
-            print(data["landmark_neutral"])
+            # print(data["landmark_perk"])
+            # print(data["landmark_neutral"])
+            # print(data["image_data"])
             prediction = pl.getEmotionPredict(data["landmark_neutral"], data["landmark_perk"])
+            subject_names = pi.getSubjectPredict(data["image_data"])
+            prediction['subject_names'] = subject_names
             #print(prediction)
         except ValueError:
             return jsonify("Input Error.")
@@ -70,4 +74,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.11.64', port=port, debug=True)
+    app.run(host='192.168.11.65', port=port, debug=True)

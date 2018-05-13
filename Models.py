@@ -24,6 +24,11 @@ def getNormalizeData():
     with open('models/normalize_data.pkl', 'rb') as input:
         data = pickle.load(input)
     return data
+
+def getSubjectImages():
+    with open('models/subject_images.pkl', 'rb') as input:
+        subject_images = pickle.load(input)
+    return subject_images    
 #print(facs)
 #print(len(models))
     
