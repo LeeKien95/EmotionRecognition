@@ -9,13 +9,15 @@ import atexit
 import cf_deployment_tracker
 import os
 import json
-
+import sys
 
 
 # Emit Bluemix deployment event
 cf_deployment_tracker.track()
 
 app = Flask(__name__)
+
+deploy_ip = sys.argv[-1]
 
 db_name = 'mydb'
 client = None
@@ -74,4 +76,4 @@ def shutdown():
 
 
 if __name__ == '__main__':
-    app.run(host='192.168.11.65', port=port, debug=True)
+    app.run(host=deploy_ip, port=port, debug=True)
