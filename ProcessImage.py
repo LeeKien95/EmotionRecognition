@@ -17,7 +17,7 @@ def getSubjectPredict(imageString):
   unknown_face = face_recognition.load_image_file('data/received_img.jpg')
   unknown_face_encoding = face_recognition.face_encodings(unknown_face)[0]
 
-  compare_results = face_recognition.compare_faces(known_faces, unknown_face_encoding)
+  compare_results = face_recognition.compare_faces(known_faces, unknown_face_encoding, 0.35)
   result = []
   for i in range(0, len(compare_results)):
     if(compare_results[i] == True):
