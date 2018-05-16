@@ -17,12 +17,29 @@ def getSubjectPredict(imageString):
   unknown_face = face_recognition.load_image_file('data/received_img.jpg')
   unknown_face_encoding = face_recognition.face_encodings(unknown_face)[0]
 
-  compare_results = face_recognition.compare_faces(known_faces, unknown_face_encoding, 0.35)
+  # result = []
+  # compare_results = face_recognition.compare_faces(known_faces, unknown_face_encoding, 0.35)
+  
+  # for i in range(0, len(compare_results)):
+  #   if(compare_results[i] == True):
+  #     if(subject_images[i][1] not in result):
+  #       result.append(subject_images[i][1])
+  # print(result)
   result = []
-  for i in range(0, len(compare_results)):
-    if(compare_results[i] == True):
-      if(subject_images[i][1] not in result):
-        result.append(subject_images[i][1])
+  offset = 0.02
+  start = 0.35
+  stop = 0.65
+  tolerance = 0.35
+  while(len(result) == 0 and tolerance < stop):
+    compare_results = face_recognition.compare_faces(known_faces, unknown_face_encoding, tolerance) 
+    tolerance += offset
+    for i in range(0, len(compare_results)):
+      if(compare_results[i] == True):
+        if(subject_images[i][1] not in result):
+          result.append(subject_images[i][1])
+
   print(result)
+  print("tolerance: " + str(tolerance))
+
   return result
 
