@@ -31,6 +31,8 @@ def normalize_perk_landmark(landmark_perk, landmark_neutral):
     for lm in landmark_perk:
         lm[0] = (perk_center[0] - lm[0]) * (1 - ratio) + lm[0]
         lm[1] = (perk_center[1] - lm[1]) * (1 - ratio) + lm[1]
+    #rolate the mask of perk to match neutral
+    
         
     return landmark_perk
 

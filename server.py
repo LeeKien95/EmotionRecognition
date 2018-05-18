@@ -52,8 +52,8 @@ def predict():
     if request.method == 'POST':
         try:
             data = request.get_json()
-            # print(data["landmark_perk"])
-            # print(data["landmark_neutral"])
+            print(data["landmark_perk"])
+            print(data["landmark_neutral"])
             # print(data["image_data"])
             prediction = pl.getEmotionPredict(data["landmark_neutral"], data["landmark_perk"])
             subject_names = pi.getSubjectPredict(data["image_data"])
