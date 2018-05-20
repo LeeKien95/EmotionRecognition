@@ -14,6 +14,12 @@ def emotion_decode(argument):
     }
     return emotion.get(argument, "Invalid emotion")
 
+def rolate(vector, angle):
+    rx = vector[0]*(math.cos(angle)) - vector[1]*(math.sin(angle))
+    ry = vector[0]*(math.sin(angle)) + vector[1]*(math.cos(angle))
+    return [rx, ry]
+
+#chuan hoa mang 68 diem landmark cua perk state theo neutral state
 def normalize_perk_landmark(landmark_perk, landmark_neutral):
     neutral_center = landmark_neutral[30]
     perk_center = landmark_perk[30]
@@ -31,10 +37,19 @@ def normalize_perk_landmark(landmark_perk, landmark_neutral):
     for lm in landmark_perk:
         lm[0] = (perk_center[0] - lm[0]) * (1 - ratio) + lm[0]
         lm[1] = (perk_center[1] - lm[1]) * (1 - ratio) + lm[1]
-    #rolate the mask of perk to match neutral
     
+    #rolate the mask of perk to match neutral
+    sign_y = scale_perk[0]*scale_neutral[1] - scale_perk[1]*scale_neutral[0]
+    sign_x = scale_perk[0]*scale_neutral[0] + scale_perk[1]*scale_neutral[1]
+    angle = math.atan2(sign_y, sign_x)
+    for lm in landmark_perk:
+        tmp_vector = [lm[0] - landmark_perk[30][0],lm[1] - landmark_perk[30][1]]
+        new_vector = rolate(tmp_vector, angle)
+        lm[0] = new_vector[0] + landmark_perk[30][0]
+        lm[1] = new_vector[1] + landmark_perk[30][1]
         
     return landmark_perk
+
 
 def coopNormalize(set1, set2):
     len1 = len(set1)

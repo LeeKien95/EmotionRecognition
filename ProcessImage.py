@@ -2,11 +2,14 @@ import Models
 import math
 import face_recognition
 import base64
+import time
 
 def getSubjectPredict(imageString):
   subject_images = Models.getSubjectImages()
   imgdata = base64.b64decode(imageString)
-  imgname = 'data/received_img.jpg'
+  ts = int(time.time())
+  imgname = 'data/received_img'+ str(ts) + '.jpg'
+
   with open(imgname, 'wb') as f:
     f.write(imgdata)
   f.close()
@@ -15,7 +18,7 @@ def getSubjectPredict(imageString):
   result = []
   for si in subject_images:
     known_faces.append(si[0])
-  unknown_face = face_recognition.load_image_file('data/received_img.jpg')
+  unknown_face = face_recognition.load_image_file(imgname)
   if(len(face_recognition.face_encodings(unknown_face)) != 0):
 
     unknown_face_encoding = face_recognition.face_encodings(unknown_face)[0]
